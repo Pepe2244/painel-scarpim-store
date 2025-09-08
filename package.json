@@ -1,0 +1,14 @@
+{
+  "name": "painel-scarpim-store",
+  "version": "1.0.0",
+  "description": "Painel de controle para a Scarpim Store usando Netlify e Neon.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Henrique",
+  "license": "ISC",
+  "dependencies": {
+    "postgres": "^3.3.5"
+  }
+}
