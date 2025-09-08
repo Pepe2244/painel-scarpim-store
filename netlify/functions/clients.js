@@ -1,3 +1,4 @@
+// NOME DO ARQUIVO: netlify/functions/clients.js
 // Importa a biblioteca 'postgres' para ligar ao Neon
 const postgres = require('postgres');
 
@@ -20,11 +21,10 @@ exports.handler = async (event) => {
         body: JSON.stringify(clients),
       };
     }
-    
+
     // SE for um pedido POST (adicionar novo cliente)
     if (event.httpMethod === 'POST') {
       const { name, number } = JSON.parse(event.body);
-      // Validação simples
       if (!name || !number) {
         return { statusCode: 400, body: 'Nome e número são obrigatórios.' };
       }
@@ -34,12 +34,12 @@ exports.handler = async (event) => {
 
     // SE for um pedido DELETE (remover cliente)
     if (event.httpMethod === 'DELETE') {
-        const { id } = JSON.parse(event.body);
-        if (!id) {
-            return { statusCode: 400, body: 'ID do cliente é obrigatório.'};
-        }
-        await sql`DELETE FROM clients WHERE id = ${id}`;
-        return { statusCode: 200 };
+      const { id } = JSON.parse(event.body);
+      if (!id) {
+        return { statusCode: 400, body: 'ID do cliente é obrigatório.' };
+      }
+      await sql`DELETE FROM clients WHERE id = ${id}`;
+      return { statusCode: 200 };
     }
 
     // Se o método não for um dos esperados
@@ -53,3 +53,4 @@ exports.handler = async (event) => {
     };
   }
 };
+

@@ -1,3 +1,4 @@
+# NOME DO ARQUIVO: netlify.toml
 # Arquivo de configuração para o Netlify
 
 [build]
@@ -6,16 +7,17 @@
 
 [dev]
   # Comando para iniciar o servidor de desenvolvimento local
-  # Framework #static significa que não estamos usando um gerador de site estático
+  # Framework #static significa que não estamos a usar um gerador de site estático
   framework = "#static"
   # Porta que o Netlify Dev usará
   port = 8888
-  # O Netlify precisa saber qual pasta servir. A raiz do projeto (./) contém o painel.html
+  # O Netlify precisa de saber que pasta servir. A raiz do projeto (./) contém o painel.html
   publish = "."
 
-# Redirecionamento para que nossas funções fiquem mais bonitas de chamar.
+# Redirecionamento para que as nossas funções fiquem mais bonitas de chamar.
 # Em vez de /.netlify/functions/inventory, podemos chamar /api/inventory.
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+

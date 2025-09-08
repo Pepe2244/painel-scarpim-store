@@ -1,4 +1,4 @@
-// NOME DO ARQUIVO: netlify/functions/inventory.js
+// NOME DO ARQUIVO: netlify/functions/expenses.js
 // Importa a biblioteca 'postgres' para ligar ao Neon
 const postgres = require('postgres');
 
@@ -15,31 +15,30 @@ exports.handler = async (event) => {
 
         // SE for um pedido GET (procurar dados)
         if (event.httpMethod === 'GET') {
-            const inventory = await sql`SELECT * FROM inventory`;
+            const expenses = await sql`SELECT * FROM expenses`;
             return {
                 statusCode: 200,
-                body: JSON.stringify(inventory),
+                body: JSON.stringify(expenses),
             };
         }
 
-        // SE for um pedido POST (adicionar novo produto)
+        // SE for um pedido POST (adicionar nova despesa)
         if (event.httpMethod === 'POST') {
-            const { name, cost, quantity } = JSON.parse(event.body);
-            await sql`INSERT INTO inventory (name, cost, quantity) VALUES (${name}, ${cost}, ${quantity})`;
+            const { description, value } = JSON.parse(event.body);
+            if (!description || !value) {
+                return { statusCode: 400, body: 'Descrição e valor são obrigatórios.' };
+            }
+            await sql`INSERT INTO expenses (description, value) VALUES (${description}, ${value})`;
             return { statusCode: 201 }; // 201 = Created
         }
 
-        // SE for um pedido PUT (atualizar quantidade)
-        if (event.httpMethod === 'PUT') {
-            const { id, quantity } = JSON.parse(event.body);
-            await sql`UPDATE inventory SET quantity = ${quantity} WHERE id = ${id}`;
-            return { statusCode: 200 };
-        }
-
-        // SE for um pedido DELETE (remover produto)
+        // SE for um pedido DELETE (remover despesa)
         if (event.httpMethod === 'DELETE') {
             const { id } = JSON.parse(event.body);
-            await sql`DELETE FROM inventory WHERE id = ${id}`;
+            if (!id) {
+                return { statusCode: 400, body: 'ID da despesa é obrigatório.' };
+            }
+            await sql`DELETE FROM expenses WHERE id = ${id}`;
             return { statusCode: 200 };
         }
 
@@ -47,7 +46,7 @@ exports.handler = async (event) => {
         return { statusCode: 405, body: 'Method Not Allowed' };
 
     } catch (error) {
-        console.error('Erro na função de stock:', error);
+        console.error('Erro na função de despesas:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Falha ao processar o pedido.' }),

@@ -1,7 +1,7 @@
 {
   "name": "painel-scarpim-store",
   "version": "1.0.0",
-  "description": "Painel de controle para a Scarpim Store usando Netlify e Neon.",
+  "description": "Painel de controlo para a Scarpim Store usando Netlify e Neon.",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,3 +12,4 @@
     "postgres": "^3.3.5"
   }
 }
+
