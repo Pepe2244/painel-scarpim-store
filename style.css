@@ -283,7 +283,7 @@ button:hover {
 .management-list {
     list-style: none;
     margin-top: 15px;
-    max-height: 150px;
+    max-height: 200px;
     overflow-y: auto;
 }
 .management-list li {

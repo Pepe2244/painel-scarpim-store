@@ -7,12 +7,8 @@ const { NEON_DATABASE_URL } = process.env;
 
 // O 'handler' é a função principal que o Netlify executará quando este endpoint for chamado
 exports.handler = async (event) => {
-    // Liga à base de dados com a configuração SSL explícita
-    const sql = postgres(NEON_DATABASE_URL, { 
-      ssl: { 
-        rejectUnauthorized: false 
-      } 
-    });
+    // Liga à base de dados
+    const sql = postgres(NEON_DATABASE_URL, { ssl: 'require' });
 
     try {
         // --- LÓGICA PARA TRATAR DIFERENTES MÉTODOS HTTP ---
@@ -58,3 +54,4 @@ exports.handler = async (event) => {
         };
     }
 };
+

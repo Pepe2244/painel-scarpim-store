@@ -1,8 +1,7 @@
 # NOME DO ARQUIVO: .gitignore
-node_modules
+# Dependências do Node.js
+/node_modules
 
-# Local Netlify folder
+# Arquivos de ambiente do Netlify
 .netlify
 
-# Variáveis de ambiente locais
-.env

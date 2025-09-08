@@ -2,7 +2,6 @@
 // --- ESTADO GLOBAL DA APLICAÇÃO ---
 let inventory = [];
 let savedClients = [];
-let savedMessages = JSON.parse(localStorage.getItem('scarpim_messages_local')) || [];
 let orders = [];
 let expenses = [];
 let goals = [];
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderClients();
         renderExpenses();
         renderOrders();
-        renderMessages();
         renderGoals(); // Deve ser antes do dashboard
         updateDashboard();
         renderCharts();
@@ -185,14 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- WHATSAPP E CLIENTES ---
-    const clientSelect = document.getElementById('client-select');
-    const whatsappNumberInput = document.getElementById('whatsapp-number');
+    // --- CLIENTES ---
     const clientNameInput = document.getElementById('client-name-input');
     const clientNumberInput = document.getElementById('client-number-input');
     const addClientBtn = document.getElementById('btn-add-client');
     const clientList = document.getElementById('client-list');
     const orderClientSelect = document.getElementById('order-client-select');
+    const noClientsMessage = document.getElementById('no-clients-message');
 
     const fetchClients = async () => {
         const response = await fetch('/api/clients');
@@ -202,12 +199,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderClients = () => {
         clientList.innerHTML = '';
-        clientSelect.innerHTML = '<option value="">Seleciona um cliente</option>';
         orderClientSelect.innerHTML = '<option value="">Seleciona um cliente</option>';
+        noClientsMessage.style.display = savedClients.length === 0 ? 'list-item' : 'none';
+
         savedClients.sort((a, b) => a.name.localeCompare(b.name));
+
         savedClients.forEach(client => {
-            clientList.innerHTML += `<li><span>${client.name}</span> <button class="delete-btn" data-id="${client.id}">X</button></li>`;
-            clientSelect.appendChild(new Option(client.name, client.name));
+            clientList.innerHTML += `<li><span>${client.name} (${client.number})</span> <button class="delete-btn" data-id="${client.id}">X</button></li>`;
             orderClientSelect.appendChild(new Option(client.name, client.name));
         });
     };
@@ -242,55 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 else { alert('Falha ao apagar o cliente.'); }
             }
         }
-    });
-
-    clientSelect.addEventListener('change', () => {
-        const selectedClient = savedClients.find(c => c.name === clientSelect.value);
-        whatsappNumberInput.value = selectedClient ? selectedClient.number : '';
-    });
-
-    // --- LÓGICA DAS MENSAGENS (Permanece local) ---
-    const messageSelect = document.getElementById('message-select');
-    const whatsappMessageInput = document.getElementById('whatsapp-message');
-    const generateLinkBtn = document.getElementById('btn-gerar-link');
-    const messageTitleInput = document.getElementById('message-title-input');
-    const messageTextInput = document.getElementById('message-text-input');
-    const addMessageBtn = document.getElementById('btn-add-message');
-    const messageList = document.getElementById('message-list');
-
-    const saveMessages = () => localStorage.setItem('scarpim_messages_local', JSON.stringify(savedMessages));
-    const renderMessages = () => {
-        messageList.innerHTML = '';
-        messageSelect.innerHTML = '<option value="">Seleciona uma mensagem</option>';
-        savedMessages.forEach((msg, index) => {
-            messageList.innerHTML += `<li><span>${msg.title}</span> <button class="delete-btn" data-index="${index}">X</button></li>`;
-            messageSelect.appendChild(new Option(msg.title, msg.text));
-        });
-    };
-    addMessageBtn.addEventListener('click', () => {
-        const title = messageTitleInput.value.trim();
-        const text = messageTextInput.value.trim();
-        if (title && text) {
-            savedMessages.push({ title, text });
-            messageTitleInput.value = ''; messageTextInput.value = '';
-            saveMessages(); renderMessages();
-        } else { alert('Preenche o título e o texto da mensagem.'); }
-    });
-    messageList.addEventListener('click', e => {
-        const { index } = e.target.dataset;
-        if (e.target.classList.contains('delete-btn') && index !== undefined) {
-            if (confirm(`Remover a mensagem "${savedMessages[index].title}"?`)) {
-                savedMessages.splice(index, 1);
-                saveMessages(); renderMessages();
-            }
-        }
-    });
-    messageSelect.addEventListener('change', () => { whatsappMessageInput.value = messageSelect.value; });
-    generateLinkBtn.addEventListener('click', () => {
-        const number = whatsappNumberInput.value.replace(/\D/g, '');
-        const message = whatsappMessageInput.value.trim();
-        if (number.length < 10) { alert('Insere um número de telemóvel válido com indicativo.'); return; }
-        window.open(`https://wa.me/55${number}?text=${encodeURIComponent(message)}`, '_blank');
     });
 
     // --- LÓGICA DE PEDIDOS ---
