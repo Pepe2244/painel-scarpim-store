@@ -1,4 +1,8 @@
+# NOME DO ARQUIVO: .gitignore
 node_modules
 
 # Local Netlify folder
 .netlify
+
+# Variáveis de ambiente locais
+.env
