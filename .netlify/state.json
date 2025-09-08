@@ -1,3 +1,21 @@
 {
-	"siteId": "eac1db4e-d701-4ec4-b072-c71966475c35"
+	"siteId": "eac1db4e-d701-4ec4-b072-c71966475c35",
+	"geolocation": {
+		"data": {
+			"city": "Itapetininga",
+			"country": {
+				"code": "BR",
+				"name": "Brazil"
+			},
+			"subdivision": {
+				"code": "SP",
+				"name": "São Paulo"
+			},
+			"timezone": "America/Sao_Paulo",
+			"latitude": -23.6446,
+			"longitude": -48.1297,
+			"postalCode": "18200"
+		},
+		"timestamp": 1757354248184
+	}
 }

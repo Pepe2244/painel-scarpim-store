@@ -4,7 +4,12 @@ const postgres = require('postgres');
 const { NEON_DATABASE_URL } = process.env;
 
 exports.handler = async (event) => {
-    const sql = postgres(NEON_DATABASE_URL, { ssl: 'require' });
+    // Liga à base de dados com a configuração SSL explícita
+    const sql = postgres(NEON_DATABASE_URL, {
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
 
     try {
         // --- LÓGICA PARA PEDIDOS GET ---
@@ -71,4 +76,3 @@ exports.handler = async (event) => {
         };
     }
 };
-
