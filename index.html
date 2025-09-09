@@ -15,18 +15,18 @@
     <div id="app-container" class="container" style="display: none;">
         <header>
             <h1>Scarpim Store</h1>
-            <p>Painel de Controle Estratégico (Online)</p>
+            <p>Painel de Controlo Estratégico (Online)</p>
         </header>
+
         <div class="tabs">
             <div class="tab active" data-target="dashboard">Dashboard</div>
+            <div class="tab" data-target="operacoes">Operações</div>
+            <div class="tab" data-target="clientes">Clientes</div>
             <div class="tab" data-target="metas">Metas</div>
             <div class="tab" data-target="relatorios">Relatórios</div>
-            <div class="tab" data-target="pedidos">Pedidos</div>
-            <div class="tab" data-target="estoque">Stock</div>
             <div class="tab" data-target="despesas">Despesas</div>
-            <div class="tab" data-target="whatsapp">WhatsApp</div>
-            <div class="tab" data-target="calculadora">Calculadora</div>
         </div>
+
         <main>
             <div id="dashboard" class="content active">
                 <div class="dashboard-grid">
@@ -53,172 +53,97 @@
                 </div>
             </div>
 
-            <div id="metas" class="content">
-                <h3>Definir Nova Meta</h3>
-                <div class="form-grid-metas">
-                    <div class="form-group">
-                        <label for="goal-description">Descrição da Meta</label>
-                        <input type="text" id="goal-description" placeholder="Ex: Faturação de Setembro">
-                    </div>
-                    <div class="form-group">
-                        <label for="goal-type">Tipo de Meta</label>
-                        <select id="goal-type">
-                            <option value="faturamento">Faturação Total</option>
-                            <option value="lucro">Lucro Líquido</option>
-                            <option value="pedidos">Número de Pedidos</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="goal-value">Valor Alvo (R$ ou Qtd.)</label>
-                        <input type="number" id="goal-value" placeholder="Ex: 2000">
-                    </div>
-                </div>
-                <button id="btn-add-goal">Adicionar Meta</button>
-                <h3 class="table-title">Metas Ativas</h3>
-                <div id="goals-container">
-                    <p class="no-data" id="no-goals-message">Nenhuma meta definida.</p>
-                </div>
-            </div>
-
-            <div id="relatorios" class="content">
-                <h3>Desempenho Financeiro por Pedido</h3>
-                <p class="export-description">Este gráfico mostra a faturação e o lucro líquido acumulado a cada novo pedido registado.</p>
-                <div class="chart-container">
-                    <canvas id="financial-chart"></canvas>
-                </div>
-            </div>
-
-            <div id="pedidos" class="content">
-                <h3>Registar Novo Pedido</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="order-client-select">Cliente</label>
-                        <select id="order-client-select">
-                            <option value="">Seleciona um cliente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="order-product-select">Produto</label>
-                        <select id="order-product-select">
-                            <option value="">Seleciona um produto</option>
-                        </select>
-                    </div>
-                     <div class="form-group">
-                        <label for="order-quantity">Quantidade</label>
-                        <input type="number" id="order-quantity" value="1" min="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="order-value">Valor do Pedido (R$)</label>
-                        <input type="number" id="order-value" placeholder="Usa a Calculadora" step="0.01">
-                    </div>
-                </div>
-                <button id="btn-add-order">Adicionar Pedido</button>
-                <h3 class="table-title">Pedidos em Aberto</h3>
-                <table id="orders-table">
-                    <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Itens</th>
-                            <th>Valor</th>
-                            <th>Status</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <p class="no-data" id="no-orders-message">Nenhum pedido registado.</p>
-            </div>
-
-             <div id="estoque" class="content">
-                <div id="inventory-form">
-                    <div class="form-group">
-                        <label for="product-name">Nome do Produto</label>
-                        <input type="text" id="product-name" placeholder="Ex: T-shirt Poesia">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-cost">Custo Unitário (R$)</label>
-                        <input type="number" id="product-cost" placeholder="Ex: 25.50" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-quantity">Quantidade</label>
-                        <input type="number" id="product-quantity" placeholder="Ex: 10">
-                    </div>
-                </div>
-                <button id="add-product-btn">Adicionar Produto</button>
-                <div id="inventory-list">
-                    <h3 class="table-title">Produtos em Stock</h3>
-                    <table id="inventory-table">
-                        <thead>
-                            <tr>
-                                <th>Produto</th>
-                                <th>Custo</th>
-                                <th>Stock</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                     <p class="no-data" id="no-stock-message">Nenhum produto em stock.</p>
-                </div>
-            </div>
-
-             <div id="despesas" class="content">
-                <h3>Registar Nova Despesa</h3>
-                <div class="form-grid-expenses">
-                    <div class="form-group">
-                        <label for="expense-description">Descrição</label>
-                        <input type="text" id="expense-description" placeholder="Ex: Compra de embalagens">
-                    </div>
-                    <div class="form-group">
-                        <label for="expense-value">Valor (R$)</label>
-                        <input type="number" id="expense-value" placeholder="Ex: 50.00" step="0.01">
-                    </div>
-                </div>
-                <button id="btn-add-expense">Adicionar Despesa</button>
-                <h3 class="table-title">Histórico de Despesas</h3>
-                <table id="expenses-table">
-                    <thead>
-                        <tr>
-                            <th>Descrição</th>
-                            <th>Valor</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <p class="no-data" id="no-expenses-message">Nenhuma despesa registada.</p>
-            </div>
-
-            <div id="whatsapp" class="content">
-                <div class="module">
-                    <h3>Gerador de Link</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="client-select">Clientes Guardados</label>
-                            <select id="client-select">
-                                <option value="">Seleciona um cliente</option>
-                            </select>
+            <div id="operacoes" class="content">
+                <div class="operacoes-grid">
+                    <div class="main-column">
+                        <div class="module">
+                            <h3>Registar Novo Pedido</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="order-client-select">Cliente</label>
+                                    <select id="order-client-select">
+                                        <option value="">Seleciona um cliente</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="order-product-select">Produto</label>
+                                    <select id="order-product-select">
+                                        <option value="">Seleciona um produto</option>
+                                    </select>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="order-quantity">Quantidade</label>
+                                    <input type="number" id="order-quantity" value="1" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="order-value">Valor do Pedido (R$)</label>
+                                    <input type="number" id="order-value" placeholder="Usa a Calculadora" step="0.01">
+                                </div>
+                            </div>
+                            <button id="btn-add-order">Adicionar Pedido</button>
                         </div>
-                        <div class="form-group">
-                            <label for="whatsapp-number">Número do Cliente</label>
-                            <input type="tel" id="whatsapp-number" placeholder="Ex: 11998765432">
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="message-select">Modelos de Mensagem</label>
-                            <select id="message-select">
-                                <option value="">Seleciona uma mensagem</option>
-                            </select>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="whatsapp-message">Mensagem</label>
-                            <textarea id="whatsapp-message" rows="4"></textarea>
+                        <div class="module">
+                            <h3 class="table-title">Pedidos em Aberto</h3>
+                            <table id="orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Itens</th>
+                                        <th>Valor</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <p class="no-data" id="no-orders-message">Nenhum pedido registado.</p>
                         </div>
                     </div>
-                    <button id="btn-gerar-link">Gerar e Abrir Link</button>
+
+                    <div class="sidebar-column">
+                        <div class="module sidebar-module">
+                            <h3>Controlo de Stock</h3>
+                            <div id="inventory-list">
+                                <table id="inventory-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Stock</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                 <p class="no-data" id="no-stock-message">Nenhum produto em stock.</p>
+                            </div>
+                        </div>
+                        <div class="module sidebar-module">
+                            <h3>Calculadora de Preço</h3>
+                            <div class="form-group">
+                                <label for="custo-peca">Custo da Peça (R$)</label>
+                                <input type="number" id="custo-peca" placeholder="25.50" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="custo-extra">Custos Extras (R$)</label>
+                                <input type="number" id="custo-extra" placeholder="Frete, taxas..." step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="margem-lucro">Margem de Lucro (%)</label>
+                                <input type="number" id="margem-lucro" placeholder="100">
+                            </div>
+                            <button id="btn-calcular">Calcular Preço</button>
+                            <div class="results" id="results-container" style="display: none;">
+                                <div class="result-item final-price"><p>Preço de Venda:</p><span id="preco-venda-valor">R$ 0,00</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <div id="clientes" class="content">
                 <div class="module-grid">
-                    <div class="module">
-                        <h3>Gerir Clientes</h3>
+                     <div class="module">
+                        <h3>Adicionar Novo Cliente</h3>
                         <div class="form-group">
                             <input type="text" id="client-name-input" placeholder="Nome do Cliente">
                         </div>
@@ -226,44 +151,22 @@
                             <input type="tel" id="client-number-input" placeholder="Número (com indicativo)">
                         </div>
                         <button id="btn-add-client">Guardar Cliente</button>
-                        <ul id="client-list" class="management-list"></ul>
-                        <li class="no-data" id="no-clients-message" style="display: none;">Nenhum cliente guardado.</li>
                     </div>
                     <div class="module">
-                        <h3>Gerir Mensagens</h3>
-                        <div class="form-group">
-                            <input type="text" id="message-title-input" placeholder="Título da Mensagem">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message-text-input" rows="2" placeholder="Texto da mensagem"></textarea>
-                        </div>
-                        <button id="btn-add-message">Guardar Mensagem</button>
-                        <ul id="message-list" class="management-list"></ul>
+                        <h3>Clientes Guardados</h3>
+                        <ul id="client-list" class="management-list">
+                           <li class="no-data" id="no-clients-message">Nenhum cliente guardado.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-             <div id="calculadora" class="content">
-                <div class="form-group">
-                    <label for="custo-peca">Custo da Peça (compra)</label>
-                    <input type="number" id="custo-peca" placeholder="Ex: 25.50" step="0.01">
+            <div id="metas" class="content">
                 </div>
-                <div class="form-group">
-                    <label for="custo-extra">Custos Extras (R$)</label>
-                    <input type="number" id="custo-extra" placeholder="Frete + Embalagem + Taxas" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="margem-lucro">Margem de Lucro Desejada (%)</label>
-                    <input type="number" id="margem-lucro" placeholder="Ex: 100">
-                </div>
-                <button id="btn-calcular">Calcular Preço de Venda</button>
-                <div class="results" id="results-container" style="display: none;">
-                    <h2>Resultado do Cálculo</h2>
-                    <div class="result-item"><p>Custo Total por Peça:</p><span id="custo-total-valor">R$ 0,00</span></div>
-                    <div class="result-item"><p>Lucro Bruto por Peça:</p><span id="lucro-bruto-valor">R$ 0,00</span></div>
-                    <div class="result-item final-price"><p>Preço Final de Venda:</p><span id="preco-venda-valor">R$ 0,00</span></div>
-                </div>
-            </div>
+            <div id="relatorios" class="content">
+                 </div>
+             <div id="despesas" class="content">
+                 </div>
         </main>
     </div>
     
