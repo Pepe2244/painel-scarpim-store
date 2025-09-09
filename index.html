@@ -83,7 +83,7 @@
                             <button id="btn-add-order">Adicionar Pedido</button>
                         </div>
                         <div class="module">
-                            <h3 class="table-title">Pedidos em Aberto</h3>
+                            <h3 class="table-title">Histórico de Pedidos</h3>
                             <table id="orders-table">
                                 <thead>
                                     <tr>
@@ -103,7 +103,7 @@
                     <div class="sidebar-column">
                          <div class="module sidebar-module">
                             <h3>Controlo de Stock</h3>
-                             <div id="inventory-list">
+                            <div id="inventory-list">
                                 <table id="inventory-table">
                                     <thead>
                                         <tr>
@@ -133,6 +133,9 @@
                             </div>
                             <button id="btn-calcular">Calcular Preço</button>
                             <div class="results" id="results-container" style="display: none;">
+                                <h2>Resultado</h2>
+                                <div class="result-item"><p>Custo Total:</p><span id="custo-total-valor">R$ 0,00</span></div>
+                                <div class="result-item"><p>Lucro Bruto:</p><span id="lucro-bruto-valor">R$ 0,00</span></div>
                                 <div class="result-item final-price"><p>Preço de Venda:</p><span id="preco-venda-valor">R$ 0,00</span></div>
                             </div>
                         </div>
@@ -145,17 +148,19 @@
                      <div class="module">
                         <h3>Adicionar Novo Cliente</h3>
                         <div class="form-group">
+                            <label for="client-name-input">Nome do Cliente</label>
                             <input type="text" id="client-name-input" placeholder="Nome do Cliente">
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="client-number-input" placeholder="Número (com indicativo)">
+                             <label for="client-number-input">Número (c/ indicativo)</label>
+                            <input type="tel" id="client-number-input" placeholder="Ex: 5515999999999">
                         </div>
                         <button id="btn-add-client">Guardar Cliente</button>
                     </div>
                     <div class="module">
                         <h3>Clientes Guardados</h3>
                         <ul id="client-list" class="management-list">
-                           <li class="no-data" id="no-clients-message" style="display: none;">Nenhum cliente guardado.</li>
+                           <li class="no-data" id="no-clients-message" style="display: list-item;">Nenhum cliente guardado.</li>
                         </ul>
                     </div>
                 </div>
