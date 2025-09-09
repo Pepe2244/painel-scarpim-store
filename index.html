@@ -101,9 +101,9 @@
                     </div>
 
                     <div class="sidebar-column">
-                        <div class="module sidebar-module">
+                         <div class="module sidebar-module">
                             <h3>Controlo de Stock</h3>
-                            <div id="inventory-list">
+                             <div id="inventory-list">
                                 <table id="inventory-table">
                                     <thead>
                                         <tr>
@@ -141,7 +141,7 @@
             </div>
 
             <div id="clientes" class="content">
-                <div class="module-grid">
+                 <div class="module-grid">
                      <div class="module">
                         <h3>Adicionar Novo Cliente</h3>
                         <div class="form-group">
@@ -155,18 +155,73 @@
                     <div class="module">
                         <h3>Clientes Guardados</h3>
                         <ul id="client-list" class="management-list">
-                           <li class="no-data" id="no-clients-message">Nenhum cliente guardado.</li>
+                           <li class="no-data" id="no-clients-message" style="display: none;">Nenhum cliente guardado.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div id="metas" class="content">
+                <h3>Definir Nova Meta</h3>
+                <div class="form-grid-metas">
+                    <div class="form-group">
+                        <label for="goal-description">Descrição da Meta</label>
+                        <input type="text" id="goal-description" placeholder="Ex: Faturação de Setembro">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-type">Tipo de Meta</label>
+                        <select id="goal-type">
+                            <option value="faturamento">Faturação Total</option>
+                            <option value="lucro">Lucro Líquido</option>
+                            <option value="pedidos">Número de Pedidos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-value">Valor Alvo (R$ ou Qtd.)</label>
+                        <input type="number" id="goal-value" placeholder="Ex: 2000">
+                    </div>
                 </div>
+                <button id="btn-add-goal">Adicionar Meta</button>
+                <h3 class="table-title">Metas Ativas</h3>
+                <div id="goals-container">
+                    <p class="no-data" id="no-goals-message">Nenhuma meta definida.</p>
+                </div>
+            </div>
+
             <div id="relatorios" class="content">
-                 </div>
+                <h3>Desempenho Financeiro por Pedido</h3>
+                <p class="export-description">Este gráfico mostra a faturação e o lucro líquido acumulado a cada novo pedido registado.</p>
+                <div class="chart-container">
+                    <canvas id="financial-chart"></canvas>
+                </div>
+            </div>
+
              <div id="despesas" class="content">
-                 </div>
+                <h3>Registar Nova Despesa</h3>
+                <div class="form-grid-expenses">
+                    <div class="form-group">
+                        <label for="expense-description">Descrição</label>
+                        <input type="text" id="expense-description" placeholder="Ex: Compra de embalagens">
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-value">Valor (R$)</label>
+                        <input type="number" id="expense-value" placeholder="Ex: 50.00" step="0.01">
+                    </div>
+                </div>
+                <button id="btn-add-expense">Adicionar Despesa</button>
+                <h3 class="table-title">Histórico de Despesas</h3>
+                <table id="expenses-table">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <p class="no-data" id="no-expenses-message">Nenhuma despesa registada.</p>
+            </div>
         </main>
     </div>
     
